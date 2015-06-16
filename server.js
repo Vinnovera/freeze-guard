@@ -1,20 +1,22 @@
 var
-	express        = require('express'),
-	http           = require('http'),
-	path           = require('path'),
-	socketio       = require('socket.io'),
-	config         = require('./config');
+	express          = require('express'),
+	http             = require('http'),
+	path             = require('path'),
+	socketio         = require('socket.io'),
+	config           = require('./config');
 
 var
-	TRESHOLD       = 35,
-	COLLECTDELAY   = 1000,
-	COOLDOWN       = 10000,
-	MAXTHREATLEVEL = 10,
-	app            = express(),
-	server         = http.createServer(app),
-	io             = socketio(server),
-	alarmHistory   = [],
-	isCollecting   = false;
+	TRESHOLD         = 35,
+	COLLECTDELAY     = 1000,
+	COOLDOWN         = 10000,
+	MAXTHREATLEVEL   = 10,
+	HISTORYINTERVAL  = 5000,
+	app              = express(),
+	server           = http.createServer(app),
+	io               = socketio(server),
+	alarmHistory     = [],
+	totalHistory     = [],
+	isCollecting     = false;
 
 app.set('port', process.env.PORT || config.expressPort);
 
@@ -24,6 +26,36 @@ server.listen(app.get('port'), function() {
 	console.log('Server listening on port ' + app.get('port'));
 });
 
+app.get('/history', function(req, res) {
+	var send = [];
+	if (totalHistory.length > 0) {
+
+		var previousTime = 0;
+		var mappedHistory = [];
+		for (var i = 0; i<totalHistory.length; i++) {
+			if (i === 0) {
+				mappedHistory.push({
+					alarms: 1,
+					time: totalHistory[i].timestamp
+				});
+			} else {
+				if (totalHistory[i].timestamp.getTime() - previousTime < HISTORYINTERVAL) {
+					mappedHistory[mappedHistory.length - 1].alarms++;
+				} else {
+					var previousTime = totalHistory[i].timestamp.getTime();
+					mappedHistory.push({
+						alarms: 1,
+						time: totalHistory[i].timestamp
+					});
+				}
+			}
+		}
+		res.send(JSON.stringify(mappedHistory));
+	} else {
+		res.send(JSON.stringify([]));
+	}
+});
+
 io.on('connection', function(socket){
 	console.log('a user connected');
 	socket.on('disconnect', function(){
@@ -31,12 +63,14 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('signal', function(msg) {
+		//console.log('Got signal: ' + msg);
 		if (parseFloat(msg) > TRESHOLD && !isCollecting) {
 			console.log('Got signal: ' + msg);
 			isCollecting = true;
 			setTimeout(function() {
 				var newAlarm = {
 					value: msg,
+					timestamp: new Date(),
 					coolDown: function () {
 						var that = this;
 						setTimeout(function() {
@@ -46,6 +80,7 @@ io.on('connection', function(socket){
 					}
 				};
 				alarmHistory.push(newAlarm);
+				totalHistory.push(newAlarm);
 				newAlarm.coolDown();
 				isCollecting = false;
 				postUpdate();
