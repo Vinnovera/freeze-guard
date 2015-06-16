@@ -17,27 +17,49 @@ body {
   font: normal 1em Helvetica, Arial, sans-serif;
   margin-bottom: 0.5em;
 }
+.icon {
+  position: absolute;
+  z-index: 2;
+}
+.icon.steps {
+  top: -120px;
+  right: 10px;
+  height: 360px;
+}
+.icon.critical {
+  top: -90px;
+  right: 80px;
+}
+.icon.warning {
+  top: 45px;
+  right: 100px;
+}
+.icon.normal {
+  right: 100px;
+  top: 165px;
+}
 .status {
   display: inline-block;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   padding: 3px 6px 2px;
-  background: #69d35e;
+  background: #7ed321;
   font-weight: normal;
 }
 .status.warning {
-  background: #63eada;
+  background: #f5a623;
 }
 .status.critical {
-  background: #3123ec;
+  background: #00d1ff;
   color: #fff;
 }
 .graph {
   height: 360px;
   position: relative;
+  margin: 0 0 30px;
 }
 .graph .area {
-  border-top: 120px solid #3123ec;
+  border-top: 120px solid #00d1ff;
   border-left: 70px solid transparent;
   position: relative;
 }
@@ -52,13 +74,13 @@ body {
 }
 .graph .area:before {
   top: 0;
-  border-top-color: #63eada;
+  border-top-color: #f5a623;
   border-left: 70px solid transparent;
 }
 .graph .area:after {
   top: 120px;
   left: 70px;
-  border-top-color: #69d35e;
+  border-top-color: #7ed321;
   border-left: 70px solid transparent;
 }
 .graph .line {
@@ -67,7 +89,7 @@ body {
   width: 100vw;
   border-bottom: 1px solid;
   top: 100%;
-  z-index: 1;
+  z-index: 5;
   font-weight: normal;
 }
 .graph .line:before {
@@ -91,17 +113,25 @@ body {
 }
 .graph .line > .alarms {
   position: absolute;
-  right: 50px;
-  bottom: 0;
+  right: 60px;
+  bottom: 3px;
+  display: inline-block;
+  background: #fff;
+  color: #1a1a1a;
+  padding: 2px 3px 1px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 .graphic {
-  margin: 0 0 30px;
+  background: #808080;
+  padding-top: 20px;
+  color: #fff;
 }
 .graphic > .sub-heading {
   text-align: right;
 }
 .summary {
-  margin: 1em 0;
+  margin-bottom: 30px;
 }
 .summary > .sub-heading {
   font-style: italic;

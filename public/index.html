@@ -11,13 +11,13 @@
 		<header class="header wrapper" role="banner">
 			<h1 class="heading">Are my pipes OK?</h1>
 		</header>
-		<main class="wrapper">
-			<section class="summary">
+		<main>
+			<section class="summary wrapper">
 				<h1 class="sub-heading">Sommarstället</h1>
 				<p class="text">3 alarms in the last 30 minutes</p>
 				<strong class="status" id="status">Normal</strong>
 			</section>
-			<figure class="graphic">
+			<figure class="graphic wrapper">
 				<figcaption class="sub-heading">Alarm frequency</figcaption>
 				<div class="graph">
 					<div class="line" id="output">
@@ -25,9 +25,13 @@
 						<span class="alarms" id="alarms">0</span>
 					</div>
 					<div class="area"></span>
+					<img src="gfx/steps.svg" class="icon steps">
+					<img src="gfx/snowflake.svg" class="icon critical">
+					<img src="gfx/fa-exclamation-circle.svg" class="icon warning">
+					<img src="gfx/fa-check-circle.svg" class="icon normal">
 				</div>
 			</figure>
-			<section id="chart"></section>
+			<section id="chart" class="wrapper"></section>
 		</main>
 
 		<script src="js/vendor/socket.io-client/socket.io.js"></script>
