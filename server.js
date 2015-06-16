@@ -6,7 +6,7 @@ var
 	config           = require('./config');
 
 var
-	TRESHOLD         = 20,
+	TRESHOLD         = 2,
 	COLLECTDELAY     = 2000,
 	COOLDOWN         = 1000*60*10,
 	MAXTHREATLEVEL   = 10,
