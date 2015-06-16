@@ -8,8 +8,20 @@
 	</head>
 	<body>
 
-		<h1 class="heading">Output</h1>
-		<main id="output"></main>
+		<header class="header wrapper" role="banner">
+			<h1 class="heading">Are my pipes OK?</h1>
+		</header>
+		<main id="output" class="wrapper">
+			<section class="summary">
+				<h1 class="sub-heading">Sommarstället</h1>
+				<p class="text">3 alarms in the last 30 minutes</p>
+				<strong class="status warning">Critical</strong>
+			</section>
+			<figure class="graphic">
+				<figcaption class="sub-heading">Alarm frequency</figcaption>
+				<div class="graph"></div>
+			</figure>
+		</main>
 
 		<script src="js/vendor/socket.io-client/socket.io.js"></script>
 		<script src="js/display.js"></script>

@@ -1,6 +1,73 @@
 body {
   margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  color: #1a1a1a;
+}
+.wrapper {
+  margin: 0 auto;
+  padding: 0 20px;
 }
 .heading {
-  font-family: Helvetica, Arial, sans-serif;
+  font: lighter 2em Helvetica, Arial, sans-serif;
+  margin-bottom: 0.3em;
+}
+.sub-heading {
+  font: normal 1em Helvetica, Arial, sans-serif;
+  margin-bottom: 0.5em;
+}
+.status {
+  display: inline-block;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 3px 6px 2px;
+  background: #69d35e;
+  font-weight: normal;
+}
+.status.warning {
+  background: #63eada;
+}
+.status.critical {
+  background: #3123ec;
+  color: #fff;
+}
+.graph {
+  border-top: 15vh solid #3123ec;
+  border-left: 17vw solid transparent;
+  position: relative;
+}
+.graph:before,
+.graph:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 15vh solid;
+}
+.graph:before {
+  top: 0;
+  border-top-color: #63eada;
+  border-left: 17vw solid transparent;
+}
+.graph:after {
+  top: 15vh;
+  left: 17vw;
+  border-top-color: #69d35e;
+  border-left: 17vw solid transparent;
+}
+.graphic {
+  margin: 0;
+}
+.graphic > .sub-heading {
+  text-align: right;
+}
+.summary {
+  margin: 1em 0;
+}
+.summary > .sub-heading {
+  font-style: italic;
+}
+.summary > .text {
+  margin: 0.5em 0;
 }

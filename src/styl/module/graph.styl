@@ -1,0 +1,24 @@
+.graph
+	border-top: 15vh solid color_critical
+	border-left: 17vw solid transparent
+	position: relative
+
+	&:before,
+	&:after
+		content: ''
+		display: block
+		position: absolute
+		left: 0
+		right: 0
+		border-top: 15vh solid
+		
+	&:before
+		top: 0
+		border-top-color: color_warning
+		border-left: 17vw solid transparent
+		
+	&:after
+		top: 15vh
+		left: 17vw
+		border-top-color: color_normal
+		border-left: 17vw solid transparent
