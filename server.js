@@ -8,8 +8,8 @@ var
 var
 	TRESHOLD         = 2,
 	COLLECTDELAY     = 2000,
-	COOLDOWN         = 1000*60*10,
-	MAXTHREATLEVEL   = 10,
+	COOLDOWN         = 1000*60*120,
+	MAXTHREATLEVEL   = 30,
 	HISTORYINTERVAL  = 5000,
 	app              = express(),
 	server           = http.createServer(app),
