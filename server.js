@@ -6,8 +6,8 @@ var
 	config           = require('./config');
 
 var
-	TRESHOLD         = 35,
-	COLLECTDELAY     = 1000,
+	TRESHOLD         = 20,
+	COLLECTDELAY     = 2000,
 	COOLDOWN         = 1000*60*10,
 	MAXTHREATLEVEL   = 10,
 	HISTORYINTERVAL  = 5000,
@@ -63,7 +63,7 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('signal', function(msg) {
-		console.log('Got signal: ' + msg);
+		//console.log('Got signal: ' + msg);
 		if (parseFloat(msg) > TRESHOLD && !isCollecting) {
 			console.log('Got signal: ' + msg);
 			isCollecting = true;
