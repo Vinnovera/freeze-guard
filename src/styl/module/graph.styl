@@ -1,24 +1,61 @@
 .graph
-	border-top: 15vh solid color_critical
-	border-left: 17vw solid transparent
+	height: 45vh
 	position: relative
+	
+	.area
+		border-top: 15vh solid color_critical
+		border-left: 17vw solid transparent
+		position: relative
 
-	&:before,
-	&:after
-		content: ''
-		display: block
+		&:before,
+		&:after
+			content: ''
+			display: block
+			position: absolute
+			left: 0
+			right: 0
+			border-top: 15vh solid
+			
+		&:before
+			top: 0
+			border-top-color: color_warning
+			border-left: 17vw solid transparent
+			
+		&:after
+			top: 15vh
+			left: 17vw
+			border-top-color: color_normal
+			border-left: 17vw solid transparent
+			
+	.line
 		position: absolute
 		left: 0
-		right: 0
-		border-top: 15vh solid
+		width: 100vw
+		border-bottom: 1px solid
+		top: 40%
+		z-index: 1
+		font-weight: normal
 		
-	&:before
-		top: 0
-		border-top-color: color_warning
-		border-left: 17vw solid transparent
-		
-	&:after
-		top: 15vh
-		left: 17vw
-		border-top-color: color_normal
-		border-left: 17vw solid transparent
+		&:before
+			content: ''
+			position: absolute
+			display: block
+			border: 6px solid;
+			border-right-color: transparent
+			border-bottom-color: transparent
+			border-top-color: transparent
+			bottom: -6px
+
+		> .label,
+		> .alarms
+			bottom: 2px
+
+		> .label
+			position: absolute
+			left: 10px
+			font-size: 14px
+
+		> .alarms
+			position: absolute
+			right: 50px
+			bottom: 0

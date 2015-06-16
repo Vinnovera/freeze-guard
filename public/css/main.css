@@ -7,10 +7,11 @@ body {
 .wrapper {
   margin: 0 auto;
   padding: 0 20px;
+  overflow: hidden;
 }
 .heading {
   font: lighter 2em Helvetica, Arial, sans-serif;
-  margin-bottom: 0.3em;
+  margin-bottom: 0;
 }
 .sub-heading {
   font: normal 1em Helvetica, Arial, sans-serif;
@@ -32,12 +33,16 @@ body {
   color: #fff;
 }
 .graph {
+  height: 45vh;
+  position: relative;
+}
+.graph .area {
   border-top: 15vh solid #3123ec;
   border-left: 17vw solid transparent;
   position: relative;
 }
-.graph:before,
-.graph:after {
+.graph .area:before,
+.graph .area:after {
   content: '';
   display: block;
   position: absolute;
@@ -45,16 +50,49 @@ body {
   right: 0;
   border-top: 15vh solid;
 }
-.graph:before {
+.graph .area:before {
   top: 0;
   border-top-color: #63eada;
   border-left: 17vw solid transparent;
 }
-.graph:after {
+.graph .area:after {
   top: 15vh;
   left: 17vw;
   border-top-color: #69d35e;
   border-left: 17vw solid transparent;
+}
+.graph .line {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  border-bottom: 1px solid;
+  top: 40%;
+  z-index: 1;
+  font-weight: normal;
+}
+.graph .line:before {
+  content: '';
+  position: absolute;
+  display: block;
+  border: 6px solid;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+  bottom: -6px;
+}
+.graph .line > .label,
+.graph .line > .alarms {
+  bottom: 2px;
+}
+.graph .line > .label {
+  position: absolute;
+  left: 10px;
+  font-size: 14px;
+}
+.graph .line > .alarms {
+  position: absolute;
+  right: 50px;
+  bottom: 0;
 }
 .graphic {
   margin: 0;
