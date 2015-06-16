@@ -39,25 +39,28 @@
 
 		var categories = [];
 		var series = [{
+	var chart = new Highcharts.Chart({
+		chart: {
+			type: 'spline',
+			renderTo: 'chart'
+		},
+		xAxis: {
+			type: 'datetime'
+		},
+		series: [{
 			name: 'Alarms',
 			data: []
-		}];
-		data.forEach(function(d) {
-			categories.push(d.time);
-			series[0].data.push(d.alarms);
-		});
+		}]
+	});
 
-		var chart = new Highcharts.Chart({
-			chart: {
-				type: 'spline',
-				renderTo: 'chart'
-			},
-			xAxis: {
-				categories: categories
-			},
-			series: series
-		});
-
+	var dataLen = 0;
+	function drawChart() {
+		var data = JSON.parse(this.responseText);
+		var len = data.length;
+		for(var i=dataLen; i<len; i++) {
+			chart.series[0].addPoint([new Date(data[i].time).getTime(), data[i].alarms]);
+		}
+		dataLen = data.length;
 	}
 
 	setInterval(function() {
