@@ -30,7 +30,7 @@
 		var data = JSON.parse(this.responseText);
 		var len = data.length;
 		for(var i=dataLen; i<len; i++) {
-			chart.series[0].addPoint([data[i].time, data[i].alarms]);
+			chart.series[0].addPoint([new Date(data[i].time).getTime(), data[i].alarms]);
 		}
 		dataLen = data.length;
 	}
