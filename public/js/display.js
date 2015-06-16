@@ -27,22 +27,21 @@
 		} else if (threatLevel > 0.33) {
 			status.className = 'status warning';
 			status.innerHTML = 'Warning';
-			
+
 		} else {
 			status.className = 'status';
 			status.innerHTML = 'Normal';
 		}
 	}
 
-	function drawChart() {
-		var data = JSON.parse(this.responseText);
-
-		var categories = [];
-		var series = [{
 	var chart = new Highcharts.Chart({
 		chart: {
 			type: 'spline',
-			renderTo: 'chart'
+			renderTo: 'chart',
+			title: 'Alarms'
+		},
+		title: {
+			text: 'Historical data'
 		},
 		xAxis: {
 			type: 'datetime'
