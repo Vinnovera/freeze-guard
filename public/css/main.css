@@ -33,12 +33,12 @@ body {
   color: #fff;
 }
 .graph {
-  height: 45vh;
+  height: 360px;
   position: relative;
 }
 .graph .area {
-  border-top: 15vh solid #3123ec;
-  border-left: 17vw solid transparent;
+  border-top: 120px solid #3123ec;
+  border-left: 70px solid transparent;
   position: relative;
 }
 .graph .area:before,
@@ -48,25 +48,25 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  border-top: 15vh solid;
+  border-top: 120px solid;
 }
 .graph .area:before {
   top: 0;
   border-top-color: #63eada;
-  border-left: 17vw solid transparent;
+  border-left: 70px solid transparent;
 }
 .graph .area:after {
-  top: 15vh;
-  left: 17vw;
+  top: 120px;
+  left: 70px;
   border-top-color: #69d35e;
-  border-left: 17vw solid transparent;
+  border-left: 70px solid transparent;
 }
 .graph .line {
   position: absolute;
   left: 0;
   width: 100vw;
   border-bottom: 1px solid;
-  top: 40%;
+  top: 100%;
   z-index: 1;
   font-weight: normal;
 }
@@ -95,7 +95,7 @@ body {
   bottom: 0;
 }
 .graphic {
-  margin: 0;
+  margin: 0 0 30px;
 }
 .graphic > .sub-heading {
   text-align: right;
