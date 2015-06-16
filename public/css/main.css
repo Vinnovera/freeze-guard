@@ -28,14 +28,14 @@ body {
 }
 .icon.critical {
   top: -90px;
-  right: 80px;
+  right: 35px;
 }
 .icon.warning {
   top: 45px;
-  right: 100px;
+  right: 55px;
 }
 .icon.normal {
-  right: 100px;
+  right: 55px;
   top: 165px;
 }
 .status {
@@ -126,6 +126,7 @@ body {
   background: #808080;
   padding-top: 20px;
   color: #fff;
+  margin-bottom: 1em;
 }
 .graphic > .sub-heading {
   text-align: right;
