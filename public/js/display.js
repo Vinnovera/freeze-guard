@@ -4,6 +4,7 @@
 
 	var output = document.getElementById('output');
 	var alarms = document.getElementById('alarms');
+	var alarms2 = document.getElementById('alarms2');
 	var status = document.getElementById('status');
 
 	socket.on('update', function(msg){
@@ -14,6 +15,7 @@
 
 		output.style.top = ((1-msg.threatLevel) * 100) + '%';
 		alarms.innerHTML = msg.alarms;
+		alarms2.innerHTML = msg.alarms;
 
 		updateStatus(+msg.threatLevel);
 	});
