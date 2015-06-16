@@ -34,11 +34,7 @@
 
 				var average = values / length;
 
-				console.log( average );
-
-				if (average > 0) {
-					socket.emit('signal', average);
-				}
+				socket.emit('signal', average);
 			}
 
 		}, function (err) {

@@ -1,14 +1,20 @@
 var
-	express      = require('express'),
-	http         = require('http'),
-	path         = require('path'),
-	socketio     = require('socket.io'),
-	config       = require('./config');
+	express        = require('express'),
+	http           = require('http'),
+	path           = require('path'),
+	socketio       = require('socket.io'),
+	config         = require('./config');
 
 var
-	app          = express(),
-	server       = http.createServer(app),
-	io           = socketio(server);
+	TRESHOLD       = 35,
+	COLLECTDELAY   = 1000,
+	COOLDOWN       = 10000,
+	MAXTHREATLEVEL = 10,
+	app            = express(),
+	server         = http.createServer(app),
+	io             = socketio(server),
+	alarmHistory   = [],
+	isCollecting   = false;
 
 app.set('port', process.env.PORT || config.expressPort);
 
@@ -24,9 +30,31 @@ io.on('connection', function(socket){
 		console.log('user disconnected');
 	});
 
-	socket.on('signal', function(msg){
-		console.log('signal: ' + msg);
-
-		io.emit('update', msg);
+	socket.on('signal', function(msg) {
+		if (parseFloat(msg) > TRESHOLD && !isCollecting) {
+			console.log('Got signal: ' + msg);
+			isCollecting = true;
+			setTimeout(function() {
+				var newAlarm = {
+					value: msg,
+					coolDown: function () {
+						var that = this;
+						setTimeout(function() {
+							alarmHistory.splice(alarmHistory.indexOf(that), 1);
+							postUpdate();
+						}, COOLDOWN);
+					}
+				};
+				alarmHistory.push(newAlarm);
+				newAlarm.coolDown();
+				isCollecting = false;
+				postUpdate();
+			}, COLLECTDELAY);
+		}
 	});
 });
+
+function postUpdate () {
+	var threatLevel = alarmHistory.length / MAXTHREATLEVEL > 1 ? 1 : alarmHistory.length / MAXTHREATLEVEL;
+	io.emit('update', threatLevel);
+}
