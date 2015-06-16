@@ -11,7 +11,7 @@
 		<header class="header wrapper" role="banner">
 			<h1 class="heading">Are my pipes OK?</h1>
 		</header>
-		<main id="output" class="wrapper">
+		<main class="wrapper">
 			<section class="summary">
 				<h1 class="sub-heading">Sommarstället</h1>
 				<p class="text">3 alarms in the last 30 minutes</p>
@@ -20,9 +20,9 @@
 			<figure class="graphic">
 				<figcaption class="sub-heading">Alarm frequency</figcaption>
 				<div class="graph">
-					<div class="line">
+					<div class="line" id="output">
 						<span class="label">right now</span>
-						<span class="alarms">3</span>
+						<span class="alarms" id="alarms">3</span>
 					</div>
 					<div class="area"></span>
 				</div>

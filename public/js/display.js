@@ -3,15 +3,18 @@
 	var socket = io();
 
 	var output = document.getElementById('output');
+	var alarms = document.getElementById('alarms');
 
 	socket.on('update', function(msg){
-		output.appendChild(document.createTextNode(msg + '\n'));
+		msg = JSON.parse(msg);
+		output.style.top = ((1-msg.threatLevel) * 100) + '%';
+		alarms.innerHTML = msg.alarms;
 	});
 
-	var request = new XMLHttpRequest();
-	request.open('GET', '/history', true);
-	request.onload = function() {
-		var data = JSON.parse(request.responseText);
+	
+
+	function drawChart() {
+		var data = JSON.parse(this.responseText);
 
 		var categories = [];
 		var series = [{
@@ -34,11 +37,13 @@
 			series: series
 		});
 
+	}
 
-	};
-	request.onerror = function() {
-		// There was a connection error of some sort
-	};
-	request.send();
+	setInterval(function() {
+		var request = new XMLHttpRequest();
+		request.open('GET', '/history', true);
+		request.onload = drawChart;
+		request.send();
+	}, 1000);
 
 })();

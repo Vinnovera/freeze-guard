@@ -8,7 +8,7 @@ var
 var
 	TRESHOLD         = 35,
 	COLLECTDELAY     = 1000,
-	COOLDOWN         = 10000,
+	COOLDOWN         = 1000*60*10,
 	MAXTHREATLEVEL   = 10,
 	HISTORYINTERVAL  = 5000,
 	app              = express(),
@@ -63,7 +63,7 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('signal', function(msg) {
-		//console.log('Got signal: ' + msg);
+		console.log('Got signal: ' + msg);
 		if (parseFloat(msg) > TRESHOLD && !isCollecting) {
 			console.log('Got signal: ' + msg);
 			isCollecting = true;
@@ -91,5 +91,8 @@ io.on('connection', function(socket){
 
 function postUpdate () {
 	var threatLevel = alarmHistory.length / MAXTHREATLEVEL > 1 ? 1 : alarmHistory.length / MAXTHREATLEVEL;
-	io.emit('update', threatLevel);
+	io.emit('update', JSON.stringify({
+		threatLevel: threatLevel,
+		alarms: alarmHistory.length
+	}));
 }
