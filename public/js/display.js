@@ -7,6 +7,10 @@
 
 	socket.on('update', function(msg){
 		msg = JSON.parse(msg);
+
+		// Keep text on the background
+		msg.threatLevel = (msg.threatLevel > 0.94) ? 0.94 : msg.threatLevel;
+
 		output.style.top = ((1-msg.threatLevel) * 100) + '%';
 		alarms.innerHTML = msg.alarms;
 	});
