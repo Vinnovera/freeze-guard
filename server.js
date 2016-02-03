@@ -70,12 +70,21 @@ io.on('connection', function(socket){
 		if (parseFloat(msg) > TRESHOLD && !isCollecting) {
 
 			var signalTime = new Date(),
-				passedTime = (signalTime - startTime) / 1000;
-			var	seconds = Math.round(passedTime % 60);
+				passedTime = (signalTime - startTime) / 1000,
+				seconds,
+				minutes,
+				hours;
+
+			seconds = Math.round(passedTime % 60);
+
+			if (seconds < 10) {
+				seconds = '0' + seconds;
+			}
+
 			passedTime = Math.floor(passedTime / 60);
-			var	minutes = Math.round(passedTime % 60);
+			minutes = Math.round(passedTime % 60);
 			passedTime = Math.floor(passedTime / 60);
-			var	hours = Math.round(passedTime % 24);
+			hours = Math.round(passedTime % 24);
 
 			console.log('Got signal: ' + msg);
 			console.log('Elapsed time: ' + hours + ":" + minutes + ":" + seconds + '\n');
