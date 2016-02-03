@@ -1,7 +1,7 @@
 {
-	"name": "team-vvs",
+	"name": "freeze-guard",
 	"version": "1.0.0",
-	"description": "Team VVS",
+	"description": "Freeze Guard",
 	"main": "server.js",
 	"dependencies": {
 		"express": "^4.12.4",

@@ -16,7 +16,9 @@ var
 	io               = socketio(server),
 	alarmHistory     = [],
 	totalHistory     = [],
-	isCollecting     = false;
+	isCollecting     = false,
+	startTime        = new Date();
+
 
 app.set('port', process.env.PORT || config.expressPort);
 
@@ -24,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 server.listen(app.get('port'), function() {
 	console.log('Server listening on port ' + app.get('port'));
+	console.log('Start time: ' + startTime);
 });
 
 app.get('/history', function(req, res) {
@@ -65,7 +68,18 @@ io.on('connection', function(socket){
 	socket.on('signal', function(msg) {
 		//console.log('Got signal: ' + msg);
 		if (parseFloat(msg) > TRESHOLD && !isCollecting) {
+
+			var signalTime = new Date(),
+				passedTime = (signalTime - startTime) / 1000;
+			var	seconds = Math.round(passedTime % 60);
+			passedTime = Math.floor(passedTime / 60);
+			var	minutes = Math.round(passedTime % 60);
+			passedTime = Math.floor(passedTime / 60);
+			var	hours = Math.round(passedTime % 24);
+
 			console.log('Got signal: ' + msg);
+			console.log('Elapsed time: ' + hours + ":" + minutes + ":" + seconds + '\n');
+
 			isCollecting = true;
 			setTimeout(function() {
 				var newAlarm = {
