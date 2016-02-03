@@ -18,6 +18,9 @@
 			analyser.smoothingTimeConstant = 0.8;
 			analyser.fftSize = 1024;
 
+      window.source = audioContext.createMediaStreamSource(stream);
+      source.connect(audioContext.destination);
+
 			microphone.connect(analyser);
 			analyser.connect(javascriptNode);
 			javascriptNode.connect(audioContext.destination);
